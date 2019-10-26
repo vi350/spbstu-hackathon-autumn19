@@ -168,23 +168,37 @@ func SelectBySkills(skills []string,id string){
 	}
 
 
+	// sort users and coincidenses
+	for i := range coincidences{
+		biggest := coincidences[0]
+		index := 0
+
+		for j:=i;j<len(coincidences);j++{
+			if (biggest<coincidences[j]){
+				index = j
+				biggest = coincidences[j]
+			}
+		}
+		var m Model.UserS
+		var num int
+		m = needingUsers[i]
+		num = coincidences[i]
+		needingUsers[i] = needingUsers[index]
+		coincidences[i] = coincidences[index]
+		needingUsers[index] = m
+		coincidences[index] = num
 
 
+	}
 
 
-		fmt.Println(model)
+	fmt.Println(model)
 	fmt.Println(allUsers)
 	fmt.Println("---------")
 	fmt.Println(users)
 	fmt.Println("++++++++++")
 	fmt.Println(needingUsers)
 	fmt.Println(coincidences)
-
-
-
-
-
-
 
 }
 

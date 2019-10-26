@@ -1,5 +1,6 @@
 package Model
 
+// data struct for insertion
 type User struct {
 	Uniqueid     string
 	Name       string
@@ -10,7 +11,7 @@ type User struct {
 	Busy       bool
 }
 
-// user struct for select fro
+// user struct for select from
 type UserS struct {
 	Id int
 	Uniqueid     string
