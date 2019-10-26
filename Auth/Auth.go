@@ -1,0 +1,32 @@
+package Auth
+
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/vi350/spbstu-hackathon-autumn19/Model"
+	"log"
+)
+
+func Auth(c *gin.Context) {
+
+	var status int
+	var message string
+
+	var dataInUser Model.DataInUser
+	var user Model.User
+
+	err := c.ShouldBindJSON(&user)
+	if err != nil {
+		status = 400
+		message = "maybe not all parameters are specified: " + err.Error()
+		log.Fatalln(err.Error())
+	} else {
+		status = 200
+		message = "seems to be ok"
+		user.Uniqueid = dataInUser.Id
+		user.Name = dataInUser.FirstName
+	}
+
+	c.JSON(status, gin.H{
+		"message":       message,
+	})
+}
