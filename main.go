@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/vi350/spbstu-hackathon-autumn19/Auth"
 	"github.com/vi350/spbstu-hackathon-autumn19/Basics"
 	"github.com/vi350/spbstu-hackathon-autumn19/DB"
 	"io"
@@ -26,10 +27,12 @@ func main() {
 	//app.Use(cors.Default())
 
 	app.GET("/", Basics.Welcome)
+	app.POST("/reg", Auth.Auth)
+
 	DB.ConnectDB()
 	DB.CreateTables()
 
-	DB.SelectBySkills([]string{""},"pdrs")
+	DB.SelectBySkills([]string{"go","gin"},"pdrs")
 
 
 	//log.Fatal(autotls.Run(app, "example1.com", "example2.com"))

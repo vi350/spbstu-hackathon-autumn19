@@ -4,10 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/go-pg/pg"
+	"github.com/vi350/spbstu-hackathon-autumn19/Passwords"
+
 	//"github.com/go-pg/pg/orm"
 	_ "github.com/go-pg/pg/orm"
 	"github.com/vi350/spbstu-hackathon-autumn19/Model"
-	"github.com/vi350/spbstu-hackathon-autumn19/Passwords"
 	"log"
 )
 
@@ -66,7 +67,8 @@ func CreateTables () {
 		}
 	}
 
-	var m Model.User = Model.User{"pdrs","oleg",5,jsoniseStrs([]string{"c","arduino"}),jsoniseInts([]int{2,6}),jsoniseInts([]int{5,7,9}),false}
+	var m Model.User = Model.User{"qweшrt","dfgh",5,jsoniseStrs([]string{"go","vue"}),jsoniseInts([]int{2,3}),jsoniseInts([]int{1,9}),false}
+
 
 	err := db.Insert(&m)
 	if err !=nil{
@@ -107,10 +109,13 @@ func SelectBySkills(skills []string,id string){
 
 	var ignored []int
 
+
 	err = json.Unmarshal([]byte(model[0].Ignored),&ignored)
 	if err != nil{
 		fmt.Println("unmarshal ignored failed",err)
 	}
+
+	fmt.Println("ignored:",ignored)
 
 
 
@@ -122,11 +127,43 @@ func SelectBySkills(skills []string,id string){
 
 	var users []Model.UserS
 
+
+
 	for _,i := range allUsers{
+		adding := true
 		for _,j := range ignored{
-			if i.Id != j{
-				users = append(users,i)
+			if i.Id == j{
+				adding = false
 			}
+		}
+		if (adding){
+			users = append(users,i)
+		}
+	}
+
+
+
+	// нужные юзеры фильтрованные по нужному нам стеку
+	var needingUsers []Model.UserS
+	// кол во совпадающих технологий
+	var coincidences []int
+
+	for _,usr := range users{
+		var itskills []string
+		json.Unmarshal([]byte(usr.Skills),&itskills)
+		adding := false
+		count := 0
+		for _,skill := range itskills{
+			for _,sk := range skills{
+				if sk == skill{
+					adding = true
+					count++
+				}
+			}
+		}
+		if(adding){
+			needingUsers = append(needingUsers,usr)
+			coincidences = append(coincidences,count)
 		}
 	}
 
@@ -135,10 +172,22 @@ func SelectBySkills(skills []string,id string){
 
 
 
+		fmt.Println(model)
+	fmt.Println(allUsers)
+	fmt.Println("---------")
+	fmt.Println(users)
+	fmt.Println("++++++++++")
+	fmt.Println(needingUsers)
+	fmt.Println(coincidences)
+
+
+
+
 
 
 
 }
+
 
 
 
