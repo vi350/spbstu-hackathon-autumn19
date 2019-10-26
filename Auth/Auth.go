@@ -3,6 +3,7 @@ package Auth
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/vi350/spbstu-hackathon-autumn19/Model"
+	"github.com/vi350/spbstu-hackathon-autumn19/DB"
 	"log"
 )
 
@@ -22,8 +23,10 @@ func Auth(c *gin.Context) {
 	} else {
 		status = 200
 		message = "seems to be ok"
-		user.Uniqueid = dataInUser.Id
-		user.Name = dataInUser.FirstName
+		err = DB.DB.Model(&user).Where("uniqueid = ?", dataInUser.Id).Select()
+		if err != nil {
+			err = DB.DB.Insert(&user)
+		}
 	}
 
 	c.JSON(status, gin.H{
