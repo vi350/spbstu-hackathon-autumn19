@@ -1,0 +1,129 @@
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (4 handlers)
+2019/10/26 10:45:47 FATAL #28P01 password authentication failed for user "postgres"
+[GIN-debug] Listening and serving HTTP on :8080
+2019/10/26 10:46:02 FATAL #28P01 password authentication failed for user "postgres"
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (4 handlers)
+2019/10/26 10:51:10 dial tcp 10.0.1.4:5432: i/o timeout
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (4 handlers)
+2019/10/26 11:00:51 dial tcp 10.0.1.4:5432: i/o timeout
+2019/10/26 11:00:51 listen tcp :443: bind: permission denied
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (4 handlers)
+2019/10/26 11:02:11 listen tcp :443: bind: permission denied
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (4 handlers)
+2019/10/26 11:02:27 listen tcp :443: bind: permission denied
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (4 handlers)
+2019/10/26 11:03:39 listen tcp :443: bind: permission denied
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (4 handlers)
+2019/10/26 11:04:27 listen tcp :443: bind: permission denied
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+2019/10/26 11:05:56 listen tcp :443: bind: permission denied
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+2019/10/26 11:31:48 listen tcp :443: bind: permission denied
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+2019/10/26 15:09:30 ОШИБКА #22P02 неверное значение для целого числа: "RSR"
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+2019/10/26 18:41:01 dial tcp 3.19.3.150:16384: i/o timeout
+2019/10/26 18:41:06 dial tcp 3.19.3.150:16384: i/o timeout
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+2019/10/26 19:13:08 listen tcp :443: bind: permission denied
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+2019/10/26 19:32:28 dial tcp 3.19.3.150:16384: i/o timeout
+2019/10/26 19:32:33 dial tcp 3.19.3.150:16384: i/o timeout
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+2019/10/26 19:32:51 dial tcp 3.19.3.150:16384: i/o timeout
+2019/10/26 19:32:56 dial tcp 3.19.3.150:16384: i/o timeout
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+2019/10/26 19:41:49 dial tcp 3.19.3.150:16384: i/o timeout
+2019/10/26 19:41:54 dial tcp 3.19.3.150:16384: i/o timeout
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+2019/10/26 19:59:43 read: connection reset by peer
+2019/10/26 19:59:48 dial tcp 3.19.3.150:16384: i/o timeout
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+2019/10/26 20:00:01 dial tcp 3.19.3.150:16384: i/o timeout
+2019/10/26 20:00:06 dial tcp 3.19.3.150:16384: i/o timeout
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+2019/10/26 21:06:09 dial tcp 18.223.41.243:16384: connect: connection refused
+2019/10/26 21:06:09 dial tcp 18.223.41.243:16384: connect: connection refused
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+2019/10/26 21:11:18 FATAL #28P01 password authentication failed for user "dimka"
+2019/10/26 21:11:19 FATAL #28P01 password authentication failed for user "dimka"
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] GET    /                         --> github.com/vi350/spbstu-hackathon-autumn19/Basics.Welcome (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080

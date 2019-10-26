@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/vi350/spbstu-hackathon-autumn19/Basics"
 	"github.com/vi350/spbstu-hackathon-autumn19/DB"
@@ -24,11 +23,16 @@ func main() {
 	gin.DefaultWriter = io.MultiWriter(logFile)
 	log.SetOutput(logFile)
 
-	app.Use(cors.Default())
+	//app.Use(cors.Default())
 
 	app.GET("/", Basics.Welcome)
 	DB.ConnectDB()
 	DB.CreateTables()
+
+	DB.SelectBySkills([]string{""},"pdrs")
+
+
+	//log.Fatal(autotls.Run(app, "example1.com", "example2.com"))
 
 	err = app.Run(":8080")
 	if err != nil {
