@@ -1,5 +1,28 @@
 package Model
 
+// data struct for insertion
+type User struct {
+	Uniqueid     string
+	Name       string
+	Rate       int8
+	Skills     string
+	Favourites string
+	Ignored    string
+	Busy       bool
+}
+
+// user struct for select from
+type UserS struct {
+	Id int
+	Uniqueid     string
+	Name       string
+	Rate       int8
+	Skills     string
+	Favourites string
+	Ignored    string
+	Busy       bool
+}
+
 type DataInUser struct {
 	Id        string `json:"id"  binding:"required"`
 	FirstName string `json:"first_name" binding:"required"`
@@ -8,14 +31,4 @@ type DataInUser struct {
 	PhotoUrl  string `json:"photo_url" binding:"required"`
 	AuthDate  string `json:"auth_date" binding:"required"`
 	Hash      string `json:"hash" binding:"required"`
-}
-
-type User struct {
-	Uniqueid   string
-	Name       string
-	Rating     int8
-	Skills     string
-	Favourites string
-	Ignored    string
-	Busy       bool
 }

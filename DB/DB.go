@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/go-pg/pg"
+	"github.com/vi350/spbstu-hackathon-autumn19/Passwords"
+
+	//"github.com/go-pg/pg/orm"
 	_ "github.com/go-pg/pg/orm"
 	"github.com/vi350/spbstu-hackathon-autumn19/Model"
-	"github.com/vi350/spbstu-hackathon-autumn19/Passwords"
 	"log"
 )
 
@@ -15,10 +17,10 @@ var DB *pg.DB
 // подключение к бд
 func ConnectDB() {
 	DB = pg.Connect(&pg.Options{
-		Addr:     "localhost:5432",
-		User:     "postgres",
+		Addr:     "89.208.196.56:5432",
+		User:     "dima",
 		Password: Passwords.DBPass,
-		Database: "hackathon",
+		Database: "keyzu",
 	})
 	Status()
 }
@@ -65,7 +67,7 @@ func CreateTables() {
 		}
 	}
 
-	var m Model.User = Model.User{"qwe1rgh", "sname", 5, jsoniseStrs([]string{"go", "gin"}), jsoniseInts([]int{5}), jsoniseInts([]int{2}), true}
+	var m Model.User = Model.User{"qweшrt","dfgh",5,jsoniseStrs([]string{"go","vue"}),jsoniseInts([]int{2,3}),jsoniseInts([]int{1,9}),false}
 
 	err := db.Insert(&m)
 	if err != nil {
@@ -97,9 +99,100 @@ func SelectBySkills(skills []string, id string) {
 		fmt.Println(err)
 	} else {
 		fmt.Println("smthng selected")
-		fmt.Println(model)
+		fmt.Println(model[0].Ignored)
 	}
 
-	//fmt.Println(rows.Model())
+	var ignored []int
+
+
+	err = json.Unmarshal([]byte(model[0].Ignored),&ignored)
+	if err != nil{
+		fmt.Println("unmarshal ignored failed",err)
+	}
+
+	fmt.Println("ignored:",ignored)
+
+
+
+	var allUsers []Model.UserS
+	err = DB.Model(&allUsers).Select()
+	if err!=nil{
+		fmt.Println(err)
+	}
+
+	var users []Model.UserS
+
+
+
+	for _,i := range allUsers{
+		adding := true
+		for _,j := range ignored{
+			if i.Id == j{
+				adding = false
+			}
+		}
+		if (adding){
+			users = append(users,i)
+		}
+	}
+
+
+
+	// нужные юзеры фильтрованные по нужному нам стеку
+	var needingUsers []Model.UserS
+	// кол во совпадающих технологий
+	var coincidences []int
+
+	for _,usr := range users{
+		var itskills []string
+		json.Unmarshal([]byte(usr.Skills),&itskills)
+		adding := false
+		count := 0
+		for _,skill := range itskills{
+			for _,sk := range skills{
+				if sk == skill{
+					adding = true
+					count++
+				}
+			}
+		}
+		if(adding){
+			needingUsers = append(needingUsers,usr)
+			coincidences = append(coincidences,count)
+		}
+	}
+
+
+	// sort users and coincidenses
+	for i := range coincidences{
+		biggest := coincidences[0]
+		index := 0
+
+		for j:=i;j<len(coincidences);j++{
+			if (biggest<coincidences[j]){
+				index = j
+				biggest = coincidences[j]
+			}
+		}
+		var m Model.UserS
+		var num int
+		m = needingUsers[i]
+		num = coincidences[i]
+		needingUsers[i] = needingUsers[index]
+		coincidences[i] = coincidences[index]
+		needingUsers[index] = m
+		coincidences[index] = num
+
+
+	}
+
+
+	fmt.Println(model)
+	fmt.Println(allUsers)
+	fmt.Println("---------")
+	fmt.Println(users)
+	fmt.Println("++++++++++")
+	fmt.Println(needingUsers)
+	fmt.Println(coincidences)
 
 }
