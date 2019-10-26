@@ -46,14 +46,15 @@ func CreateTables () {
 	qs := []string{
 		/* language=PostgreSQL */
 		`CREATE TABLE IF NOT EXISTS users(
-         id SERIAL PRIMARY KEY,
-         uniqueid text ,
-    name text,
-    rate numeric,
-    skills text,
-    favourites text,
-    ignored text,
-    busy bool
+        id SERIAL PRIMARY KEY,
+        uniqueid text ,
+        token text,
+    	name text,
+    	rating numeric,
+    	skills text,
+    	favourites text,
+    	ignored text,
+    	busy bool
   )`,
 
 	}
