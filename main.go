@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/semyon_dev/keyzu-backend/Order"
 	"github.com/vi350/spbstu-hackathon-autumn19/Auth"
 	"github.com/vi350/spbstu-hackathon-autumn19/Basics"
 	"github.com/vi350/spbstu-hackathon-autumn19/DB"
@@ -28,7 +29,8 @@ func main() {
 	app.Use(cors.Default())
 
 	app.GET("/", Basics.Welcome)
-	app.POST("/reg", Auth.Auth)
+	app.POST("/auth", Auth.Auth)
+	app.GET("/update/:action/:data", Order.CheckOrder)
 
 	DB.ConnectDB()
 	DB.CreateTables()

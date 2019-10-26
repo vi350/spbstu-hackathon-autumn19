@@ -2,8 +2,8 @@ package Auth
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/vi350/spbstu-hackathon-autumn19/Model"
 	"github.com/vi350/spbstu-hackathon-autumn19/DB"
+	"github.com/vi350/spbstu-hackathon-autumn19/Model"
 	"log"
 )
 
@@ -15,7 +15,7 @@ func Auth(c *gin.Context) {
 	var dataInUser Model.DataInUser
 	var user Model.User
 
-	err := c.ShouldBindJSON(&user)
+	err := c.ShouldBindJSON(&dataInUser)
 	if err != nil {
 		status = 400
 		message = "maybe not all parameters are specified: " + err.Error()
@@ -30,6 +30,6 @@ func Auth(c *gin.Context) {
 	}
 
 	c.JSON(status, gin.H{
-		"message":       message,
+		"message": message,
 	})
 }

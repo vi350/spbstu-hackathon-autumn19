@@ -13,9 +13,9 @@ import (
 var DB *pg.DB
 
 // подключение к бд
-func ConnectDB () {
+func ConnectDB() {
 	DB = pg.Connect(&pg.Options{
-		Addr:     "0.tcp.ngrok.io:16384",
+		Addr:     "localhost:5432",
 		User:     "postgres",
 		Password: Passwords.DBPass,
 		Database: "hackathon",
@@ -24,7 +24,7 @@ func ConnectDB () {
 }
 
 // проверка подключения к бд
-func Status() bool{
+func Status() bool {
 	var status bool
 	_, err := DB.Exec("SELECT 1")
 	if err != nil {
@@ -39,7 +39,7 @@ func Status() bool{
 }
 
 // создание таблиц и полей
-func CreateTables () {
+func CreateTables() {
 	db := DB
 	qs := []string{
 		/* language=PostgreSQL */
@@ -47,13 +47,12 @@ func CreateTables () {
          id SERIAL PRIMARY KEY,
          uniqueid text ,
     name text,
-    rate numeric,
+    rating numeric,
     skills text,
     favourites text,
     ignored text,
     busy bool
   )`,
-
 	}
 	for _, q := range qs {
 		_, err := db.Exec(q)
@@ -65,50 +64,41 @@ func CreateTables () {
 		}
 	}
 
-	var m Model.User = Model.User{"qwe1rgh","sname",5,jsoniseStrs([]string{"go","gin"}),jsoniseInts([]int{5}),jsoniseInts([]int{2}),true}
+	var m Model.User = Model.User{"qwe1rgh", "sname", 5, jsoniseStrs([]string{"go", "gin"}), jsoniseInts([]int{5}), jsoniseInts([]int{2}), true}
 
 	err := db.Insert(&m)
-	if err !=nil{
+	if err != nil {
 		fmt.Println("bleat")
 		fmt.Println(err)
 	}
 
-
 }
 
-
-func jsoniseStrs(arr []string)string  {
-	slc,_ := json.Marshal(arr)
+func jsoniseStrs(arr []string) string {
+	slc, _ := json.Marshal(arr)
 	return string(slc)
 
 }
 
-func jsoniseInts(arr []int)string  {
-	slc,_ := json.Marshal(arr)
+func jsoniseInts(arr []int) string {
+	slc, _ := json.Marshal(arr)
 	return string(slc)
 }
 
-
-
-func SelectBySkills(skills []string,id string){
+func SelectBySkills(skills []string, id string) {
 
 	var model []Model.User
 
 	/* language=PostgreSQL */
-	err := DB.Model(&model).Column("ignored").Where(`uniqueid = ?`,id).Select()
-	if err!=nil{
+	err := DB.Model(&model).Column("ignored").Where(`uniqueid = ?`, id).Select()
+	if err != nil {
 		fmt.Println("SELECT FAILED!")
 		fmt.Println(err)
-	}else {
+	} else {
 		fmt.Println("smthng selected")
 		fmt.Println(model)
 	}
 
-
-
 	//fmt.Println(rows.Model())
-
-
-
 
 }
