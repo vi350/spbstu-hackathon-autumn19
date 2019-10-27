@@ -26,12 +26,16 @@ func Auth(c *gin.Context) {
 		status = 200
 		message = "seems to be ok"
 		err = DB.DB.Model(&user).Where("uniqueid = ?", dataInUser.Id).Select()
+		user.Name = dataInUser.FirstName
+		user.Uniqueid = dataInUser.Id
+		user.Rating = 5
+		user.Busy = false
 		if err != nil {
 			err = DB.DB.Insert(&user)
 		}
 		var token string
 		token, _ = GenerateRandomString(15)
-		_, _ = DB.DB.Model(&user).Set("token = ?", token).Where("id = ?", "321").Returning("*").Update()
+		_, _ = DB.DB.Model(&user).Set("token = ?", token).Where("uniqueid = ?", dataInUser.Id).Update()
 	}
 
 	c.JSON(status, gin.H{
@@ -58,5 +62,5 @@ func A() {
 	var user Model.User
 	var token string
 	token, _ = GenerateRandomString(15)
-	_, _ = DB.DB.Model(&user).Set("token = ?", token).Where("uniqueid = ?", "pdrs").Update()
+	_, _ = DB.DB.Model(&user).Set("token = ?", token).Where("uniqueid = ?", "qweшrt").Update()
 }

@@ -67,13 +67,12 @@ func CreateTables() {
 		}
 	}
 
-	var m Model.User = Model.User{"qw","dfgh",5,jsoniseStrs([]string{"vue","js"}),jsoniseInts([]int{3,1}),jsoniseInts([]int{2,9}),true}
-
-	err := db.Insert(&m)
-	if err != nil {
-		fmt.Println("bleat")
-		fmt.Println(err)
-	}
+	//var m Model.User = Model.User{"qw","dfgh",5,jsoniseStrs([]string{"vue","js"}),jsoniseInts([]int{3,1}),jsoniseInts([]int{2,9}),true}
+	//err := db.Insert(&m)
+	//if err != nil {
+	//	fmt.Println("bleat")
+	//	fmt.Println(err)
+	//}
 
 }
 

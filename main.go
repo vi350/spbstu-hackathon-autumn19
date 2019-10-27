@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "github.com/gin-contrib/cors"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/vi350/spbstu-hackathon-autumn19/Auth"
 	"github.com/vi350/spbstu-hackathon-autumn19/Basics"
@@ -26,7 +26,7 @@ func main() {
 	gin.DefaultWriter = io.MultiWriter(logFile)
 	log.SetOutput(logFile)
 
-	//app.Use(cors.Default())
+	app.Use(cors.Default())
 
 	app.GET("/", Basics.Welcome)
 	app.POST("/auth", Auth.Auth)
@@ -35,8 +35,6 @@ func main() {
 	DB.ConnectDB()
 	DB.CreateTables()
 
-	DB.SelectBySkills([]string{"go","gin"},"pdrs")
-	Auth.A()
 	DB.SelectBySkills([]string{"go","vue"},"qw")
 
 
