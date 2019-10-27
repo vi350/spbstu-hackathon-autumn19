@@ -20,7 +20,7 @@ func ConnectDB() {
 	DB = pg.Connect(&pg.Options{
 		Addr:     "89.208.196.56:5432",
 		User:     "dima",
-		Password: Passwords.DBPass,
+		Password: Passwords.DBPass, //you need manually add package Passwords ("Passwords/Passwords.go") and create string DBPass with your pass
 		Database: "keyzu",
 	})
 	Status()
