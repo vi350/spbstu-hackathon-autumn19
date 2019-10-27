@@ -31,6 +31,7 @@ func main() {
 	app.GET("/", Basics.Welcome)
 	app.POST("/auth", Auth.Auth)
 	app.GET("/busy/:data", Update.Busy)
+	app.POST("/search",DB.SelectUsers)
 
 	DB.ConnectDB()
 	DB.CreateTables()
