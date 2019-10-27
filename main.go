@@ -32,7 +32,7 @@ func main() {
 	DB.ConnectDB()
 	DB.CreateTables()
 
-	DB.SelectBySkills([]string{"go","gin"},"pdrs")
+	DB.SelectBySkills([]string{"go","vue"},"pdrs")
 
 
 	//log.Fatal(autotls.Run(app, "example1.com", "example2.com"))
