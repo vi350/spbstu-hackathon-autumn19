@@ -4,7 +4,7 @@ package Model
 type User struct {
 	Uniqueid     string
 	Name       string
-	Rate       int8
+	Rating       int8
 	Skills     string
 	Favourites string
 	Ignored    string
@@ -16,7 +16,7 @@ type UserS struct {
 	Id int
 	Uniqueid     string
 	Name       string
-	Rate       int8
+	Rating       int8
 	Skills     string
 	Favourites string
 	Ignored    string

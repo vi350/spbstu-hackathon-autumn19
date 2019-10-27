@@ -37,6 +37,7 @@ func main() {
 
 	DB.SelectBySkills([]string{"go","gin"},"pdrs")
 	Auth.A()
+	DB.SelectBySkills([]string{"go","vue"},"qw")
 
 
 	//log.Fatal(autotls.Run(app, "example1.com", "example2.com"))
