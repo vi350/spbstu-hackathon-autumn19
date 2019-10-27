@@ -11,7 +11,7 @@
 
 ```
 package Passwords
-var DBPass string = "dimKa2001"
+var DBPass string = "password"
 ```
 
 [фронтенд]:https://github.com/kniazevgeny/hackathon2019-politech
