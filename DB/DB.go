@@ -67,7 +67,7 @@ func CreateTables() {
 		}
 	}
 
-	var m Model.User = Model.User{"qw","dfgh",5,jsoniseStrs([]string{"vue","go"}),jsoniseInts([]int{3}),jsoniseInts([]int{1,9}),false}
+	var m Model.User = Model.User{"qw","dfgh",5,jsoniseStrs([]string{"vue","js"}),jsoniseInts([]int{3,1}),jsoniseInts([]int{2,9}),true}
 
 	err := db.Insert(&m)
 	if err != nil {
@@ -90,7 +90,7 @@ func jsoniseInts(arr []int) string {
 
 
 
-func SelectBySkills(skills []string,id string) ([]Model.UserS,[]int) {
+func SelectBySkills(skills []string,id string) []Model.UserS {
 
 
 	var model []Model.User
@@ -173,8 +173,8 @@ func SelectBySkills(skills []string,id string) ([]Model.UserS,[]int) {
 
 	// sort users and coincidenses
 	for i := range coincidences{
-		biggest := coincidences[0]
-		index := 0
+		biggest := coincidences[i]
+		index := i
 
 		for j:=i;j<len(coincidences);j++{
 			if (biggest<coincidences[j]){
@@ -201,6 +201,6 @@ func SelectBySkills(skills []string,id string) ([]Model.UserS,[]int) {
 
 
 
-	return needingUsers,coincidences
+	return needingUsers
 }
 
