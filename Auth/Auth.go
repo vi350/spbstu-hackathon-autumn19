@@ -3,6 +3,7 @@ package Auth
 import (
 	"crypto/rand"
 	"encoding/base64"
+	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/vi350/spbstu-hackathon-autumn19/DB"
 	"github.com/vi350/spbstu-hackathon-autumn19/Model"
@@ -16,6 +17,10 @@ func Auth(c *gin.Context) {
 
 	var dataInUser Model.DataInUser
 	var user Model.User
+	var token string
+	var skills []string
+	var favourites []int
+	var ignored []int
 
 	err := c.ShouldBindJSON(&dataInUser)
 	if err != nil {
@@ -28,18 +33,30 @@ func Auth(c *gin.Context) {
 		err = DB.DB.Model(&user).Where("uniqueid = ?", dataInUser.Id).Select()
 		user.Name = dataInUser.FirstName
 		user.Uniqueid = dataInUser.Id
+		user.Username = dataInUser.Username
+		user.Photourl = dataInUser.PhotoUrl
 		user.Rating = 5
 		user.Busy = false
 		if err != nil {
 			err = DB.DB.Insert(&user)
 		}
-		var token string
 		token, _ = GenerateRandomString(15)
 		_, _ = DB.DB.Model(&user).Set("token = ?", token).Where("uniqueid = ?", dataInUser.Id).Update()
+		_ = json.Unmarshal([]byte(user.Skills),&skills)
+		_ = json.Unmarshal([]byte(user.Favourites),&favourites)
+		_ = json.Unmarshal([]byte(user.Ignored),&ignored)
 	}
 
 	c.JSON(status, gin.H{
 		"message": message,
+		"token": token,
+		"uniqueid": user.Uniqueid,
+		"name": user.Name,
+		"photourl": user.Photourl,
+		"skills": skills,
+		"favourites": favourites,
+		"ignored": ignored,
+		"busy": user.Busy,
 	})
 }
 

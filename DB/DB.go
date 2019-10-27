@@ -51,6 +51,8 @@ func CreateTables() {
         uniqueid text ,
         token text,
     	name text,
+    	username text,
+    	photourl text,
     	rating numeric,
     	skills text,
     	favourites text,
@@ -68,8 +70,9 @@ func CreateTables() {
 		}
 	}
 
-	//var m Model.User = Model.User{"qw","dfgh",5,jsoniseStrs([]string{"vue","js"}),jsoniseInts([]int{3,1}),jsoniseInts([]int{2,9}),true}
-	//err := db.Insert(&m)
+	//var m Model.User = Model.User{"qw","dfgh", "@qw", "urlll", 5,jsoniseStrs([]string{"vue","js"}),jsoniseInts([]int{3,1}),jsoniseInts([]int{2,9}),true}
+	//
+	//err := DB.Insert(&m)
 	//if err != nil {
 	//	fmt.Println("bleat")
 	//	fmt.Println(err)
@@ -88,9 +91,70 @@ func jsoniseInts(arr []int) string {
 	return string(slc)
 }
 
+func SelectUsers(c *gin.Context){
+	type DataInUs struct {
+		Id        string `json:"id"  binding:"required"`
+		FirstName string `json:"first_name" binding:"required"`
+	}
+	type skillsFor struct {
+		Skills    []string `json:"skills" binding:"required"`
+		Uniqueid  string   `json:"uniqueid" binding:"required"`
+	}
+	var data skillsFor
+
+	status := 200
+	message := "ok"
+
+	err := c.ShouldBindJSON(&data)
+	if err!=nil{
+		status = 400
+		message = "json not binded"
+		fmt.Println(err)
+		panic(err)
+	}
+
+	fmt.Println(data.Skills)
+	var users []Model.UserS
+	users = SelectBySkills(data.Skills,data.Uniqueid)
+
+	type sendUsers struct {
+		Id int
+		Uniqueid     string
+		Name         string
+		Rating       int8
+		Skills     []string
+		Favourites []int
+		Ignored    []int
+		Busy         bool
+	}
+
+	var outUsers []sendUsers
+
+	for _,i := range users{
+		var outUser sendUsers
+		outUser.Id = i.Id
+		outUser.Busy = i.Busy
+		outUser.Name = i.Name
+		outUser.Uniqueid = i.Uniqueid
+		var ignored,favourites []int
+		var skills []string
+		_ = json.Unmarshal([]byte(i.Favourites),&favourites)
+		_ = json.Unmarshal([]byte(i.Ignored),&ignored)
+		_ = json.Unmarshal([]byte(i.Skills),&skills)
+		outUser.Ignored = ignored
+		outUser.Favourites =favourites
+		outUser.Skills = skills
+		outUsers = append(outUsers,outUser)
+	}
 
 
-func SelectBySkills(skills []string,id string) []Model.UserS {
+	c.JSON(status, gin.H{
+		"message":  message,
+		"users":    outUsers,
+	})
+}
+
+func SelectBySkills(skills []string, id string) []Model.UserS {
 
 
 	var model []Model.User
@@ -203,36 +267,3 @@ func SelectBySkills(skills []string,id string) []Model.UserS {
 
 	return needingUsers
 }
-
-
-func SelectUsers(c *gin.Context){
-	type skillsFor struct {
-		skills []string `json:skills`
-		uniqueId string `json:uniqueid`
-	}
-
-	status := 200
-	message := "ok"
-
-	var data skillsFor
-	err := c.ShouldBindJSON(&data)
-	if err!=nil{
-		status = 400
-		message = "json not binded"
-		fmt.Println(err)
-		panic(err)
-	}
-
-	var users []Model.UserS
-	users = SelectBySkills(data.skills,data.uniqueId)
-
-
-	c.JSON(status, gin.H{
-		"message":  message,
-		"users":    users,
-	})
-}
-
-
-
-

@@ -4,6 +4,8 @@ package Model
 type User struct {
 	Uniqueid     string
 	Name       string
+	Username       string
+	Photourl       string
 	Rating       int8
 	Skills     string
 	Favourites string
