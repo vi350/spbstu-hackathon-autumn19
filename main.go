@@ -1,10 +1,12 @@
 package main
 
 import (
+	_ "github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/vi350/spbstu-hackathon-autumn19/Auth"
 	"github.com/vi350/spbstu-hackathon-autumn19/Basics"
 	"github.com/vi350/spbstu-hackathon-autumn19/DB"
+	"github.com/vi350/spbstu-hackathon-autumn19/Update"
 	"io"
 	"log"
 	"os"
@@ -27,7 +29,8 @@ func main() {
 	//app.Use(cors.Default())
 
 	app.GET("/", Basics.Welcome)
-	app.POST("/reg", Auth.Auth)
+	app.POST("/auth", Auth.Auth)
+	app.GET("/busy/:data", Update.Busy)
 
 	DB.ConnectDB()
 	DB.CreateTables()

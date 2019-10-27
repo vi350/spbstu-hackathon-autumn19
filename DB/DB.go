@@ -15,7 +15,7 @@ import (
 var DB *pg.DB
 
 // подключение к бд
-func ConnectDB () {
+func ConnectDB() {
 	DB = pg.Connect(&pg.Options{
 		Addr:     "89.208.196.56:5432",
 		User:     "dima",
@@ -26,7 +26,7 @@ func ConnectDB () {
 }
 
 // проверка подключения к бд
-func Status() bool{
+func Status() bool {
 	var status bool
 	_, err := DB.Exec("SELECT 1")
 	if err != nil {
@@ -41,21 +41,21 @@ func Status() bool{
 }
 
 // создание таблиц и полей
-func CreateTables () {
+func CreateTables() {
 	db := DB
 	qs := []string{
 		/* language=PostgreSQL */
 		`CREATE TABLE IF NOT EXISTS users(
-         id SERIAL PRIMARY KEY,
-         uniqueid text ,
-    name text,
-    rate numeric,
-    skills text,
-    favourites text,
-    ignored text,
-    busy bool
+        id SERIAL PRIMARY KEY,
+        uniqueid text ,
+        token text,
+    	name text,
+    	rating numeric,
+    	skills text,
+    	favourites text,
+    	ignored text,
+    	busy bool
   )`,
-
 	}
 	for _, q := range qs {
 		_, err := db.Exec(q)
@@ -69,25 +69,22 @@ func CreateTables () {
 
 	var m Model.User = Model.User{"qweшrt","dfgh",5,jsoniseStrs([]string{"vue","web"}),jsoniseInts([]int{2,3}),jsoniseInts([]int{1,9}),false}
 
-
 	err := db.Insert(&m)
-	if err !=nil{
+	if err != nil {
 		fmt.Println("bleat")
 		fmt.Println(err)
 	}
 
-
 }
 
-
-func jsoniseStrs(arr []string)string  {
-	slc,_ := json.Marshal(arr)
+func jsoniseStrs(arr []string) string {
+	slc, _ := json.Marshal(arr)
 	return string(slc)
 
 }
 
-func jsoniseInts(arr []int)string  {
-	slc,_ := json.Marshal(arr)
+func jsoniseInts(arr []int) string {
+	slc, _ := json.Marshal(arr)
 	return string(slc)
 }
 
@@ -95,14 +92,15 @@ func jsoniseInts(arr []int)string  {
 
 func SelectBySkills(skills []string,id string) ([]Model.UserS,[]int) {
 
+
 	var model []Model.User
 
 	/* language=PostgreSQL */
-	err := DB.Model(&model).Column("ignored").Where(`uniqueid = ?`,id).Select()
-	if err!=nil{
+	err := DB.Model(&model).Column("ignored").Where(`uniqueid = ?`, id).Select()
+	if err != nil {
 		fmt.Println("SELECT FAILED!")
 		fmt.Println(err)
-	}else {
+	} else {
 		fmt.Println("smthng selected")
 		fmt.Println(model[0].Ignored)
 	}
