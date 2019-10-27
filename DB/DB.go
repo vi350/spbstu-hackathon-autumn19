@@ -3,6 +3,7 @@ package DB
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/go-pg/pg"
 	"github.com/vi350/spbstu-hackathon-autumn19/Passwords"
 
@@ -203,4 +204,36 @@ func SelectBySkills(skills []string,id string) []Model.UserS {
 
 	return needingUsers
 }
+
+
+func SelectUsers(c *gin.Context){
+	type skillsFor struct {
+		skills []string `json:skills`
+		uniqueId string `json:uniqueid`
+	}
+
+	status := 200
+	message := "ok"
+
+	var data skillsFor
+	err := c.ShouldBindJSON(&data)
+	if err!=nil{
+		status = 400
+		message = "json not binded"
+		fmt.Println(err)
+		panic(err)
+	}
+
+	var users []Model.UserS
+	users = SelectBySkills(data.skills,data.uniqueId)
+
+
+	c.JSON(status, gin.H{
+		"message":  message,
+		"users":    users,
+	})
+}
+
+
+
 
