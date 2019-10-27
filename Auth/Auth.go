@@ -53,3 +53,10 @@ func GenerateRandomString(s int) (string, error) {
 	b, err := GenerateRandomBytes(s)
 	return base64.URLEncoding.EncodeToString(b), err
 }
+
+func A() {
+	var user Model.User
+	var token string
+	token, _ = GenerateRandomString(15)
+	_, _ = DB.DB.Model(&user).Set("token = ?", token).Where("uniqueid = ?", "pdrs").Update()
+}

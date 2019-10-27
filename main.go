@@ -36,6 +36,7 @@ func main() {
 	DB.CreateTables()
 
 	DB.SelectBySkills([]string{"go","gin"},"pdrs")
+	Auth.A()
 
 
 	//log.Fatal(autotls.Run(app, "example1.com", "example2.com"))
