@@ -67,7 +67,7 @@ func CreateTables() {
 		}
 	}
 
-	var m Model.User = Model.User{"qweшrt","dfgh",5,jsoniseStrs([]string{"vue","web"}),jsoniseInts([]int{2,3}),jsoniseInts([]int{1,9}),false}
+	var m Model.User = Model.User{"qw","dfgh",5,jsoniseStrs([]string{"vue","go"}),jsoniseInts([]int{3}),jsoniseInts([]int{1,9}),false}
 
 	err := db.Insert(&m)
 	if err != nil {
@@ -106,7 +106,6 @@ func SelectBySkills(skills []string,id string) ([]Model.UserS,[]int) {
 	}
 
 	var ignored []int
-
 
 	err = json.Unmarshal([]byte(model[0].Ignored),&ignored)
 	if err != nil{
