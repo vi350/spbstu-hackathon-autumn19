@@ -36,11 +36,6 @@ func main() {
 	DB.ConnectDB()
 	DB.CreateTables()
 
-	DB.SelectBySkills([]string{"go","vue"},"qw")
-
-
-	//log.Fatal(autotls.Run(app, "example1.com", "example2.com"))
-
 	err = app.Run(":8080")
 	if err != nil {
 		log.Panic(err)
