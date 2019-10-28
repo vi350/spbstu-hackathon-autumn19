@@ -69,36 +69,16 @@ func CreateTables() {
 			fmt.Println("Таблица успешно создана или уже есть")
 		}
 	}
-
-	//var m Model.User = Model.User{"qw","dfgh", "@qw", "urlll", 5,jsoniseStrs([]string{"vue","js"}),jsoniseInts([]int{3,1}),jsoniseInts([]int{2,9}),true}
-	//
-	//err := DB.Insert(&m)
-	//if err != nil {
-	//	fmt.Println("bleat")
-	//	fmt.Println(err)
-	//}
-
 }
 
-func jsoniseStrs(arr []string) string {
-	slc, _ := json.Marshal(arr)
-	return string(slc)
-
-}
-
-func jsoniseInts(arr []int) string {
-	slc, _ := json.Marshal(arr)
-	return string(slc)
-}
-
-func SelectUsers(c *gin.Context){
+func SelectUsers(c *gin.Context) {
 	type DataInUs struct {
 		Id        string `json:"id"  binding:"required"`
 		FirstName string `json:"first_name" binding:"required"`
 	}
 	type skillsFor struct {
-		Skills    []string `json:"skills" binding:"required"`
-		Uniqueid  string   `json:"uniqueid" binding:"required"`
+		Skills   []string `json:"skills" binding:"required"`
+		Uniqueid string   `json:"uniqueid" binding:"required"`
 	}
 	var data skillsFor
 
@@ -106,7 +86,7 @@ func SelectUsers(c *gin.Context){
 	message := "ok"
 
 	err := c.ShouldBindJSON(&data)
-	if err!=nil{
+	if err != nil {
 		status = 400
 		message = "json not binded"
 		fmt.Println(err)
@@ -115,52 +95,50 @@ func SelectUsers(c *gin.Context){
 
 	fmt.Println(data.Skills)
 	var users []Model.UserS
-	users = SelectBySkills(data.Skills,data.Uniqueid)
+	users = SelectBySkills(data.Skills, data.Uniqueid)
 
 	type sendUsers struct {
-		Id int
-		Uniqueid     string
-		Name         string
-		Rating       int8
+		Id         int
+		Uniqueid   string
+		Name       string
+		Rating     int8
 		Skills     []string
 		Favourites []int
 		Ignored    []int
-		Busy         bool
+		Busy       bool
 	}
 
 	var outUsers []sendUsers
 
-	for _,i := range users{
+	for _, i := range users {
 		var outUser sendUsers
 		outUser.Id = i.Id
 		outUser.Busy = i.Busy
 		outUser.Name = i.Name
 		outUser.Uniqueid = i.Uniqueid
-		var ignored,favourites []int
+		var ignored, favourites []int
 		var skills []string
-		_ = json.Unmarshal([]byte(i.Favourites),&favourites)
-		_ = json.Unmarshal([]byte(i.Ignored),&ignored)
-		_ = json.Unmarshal([]byte(i.Skills),&skills)
+		_ = json.Unmarshal([]byte(i.Favourites), &favourites)
+		_ = json.Unmarshal([]byte(i.Ignored), &ignored)
+		_ = json.Unmarshal([]byte(i.Skills), &skills)
 		outUser.Ignored = ignored
-		outUser.Favourites =favourites
+		outUser.Favourites = favourites
 		outUser.Skills = skills
-		outUsers = append(outUsers,outUser)
+		outUsers = append(outUsers, outUser)
 	}
 
-
 	c.JSON(status, gin.H{
-		"message":  message,
-		"users":    outUsers,
+		"message": message,
+		"users":   outUsers,
 	})
 }
 
+//noinspection ALL
 func SelectBySkills(skills []string, id string) []Model.UserS {
-
 
 	var model []Model.User
 
-	/* language=PostgreSQL */
-	err := DB.Model(&model).Column("ignored").Where(`uniqueid = ?`, id).Select()
+	err := DB.Model(&model).Column("ignored").Where("uniqueid = ?", id).Select()
 	if err != nil {
 		fmt.Println("SELECT FAILED!")
 		fmt.Println(err)
@@ -171,77 +149,68 @@ func SelectBySkills(skills []string, id string) []Model.UserS {
 
 	var ignored []int
 
-	err = json.Unmarshal([]byte(model[0].Ignored),&ignored)
-	if err != nil{
-		fmt.Println("unmarshal ignored failed",err)
+	err = json.Unmarshal([]byte(model[0].Ignored), &ignored)
+	if err != nil {
+		fmt.Println("unmarshal ignored failed", err)
 	}
 
-	fmt.Println("ignored:",ignored)
-
-
+	fmt.Println("ignored:", ignored)
 
 	var allUsers []Model.UserS
 	err = DB.Model(&allUsers).Select()
-	if err!=nil{
+	if err != nil {
 		fmt.Println(err)
 	}
 
 	var users []Model.UserS
 
-
-
-	for _,i := range allUsers{
+	for _, i := range allUsers {
 		adding := true
-		for _,j := range ignored{
-			if i.Id == j{
+		for _, j := range ignored {
+			if i.Id == j {
 				adding = false
 			}
 		}
-		if (adding){
-			users = append(users,i)
+		if adding {
+			users = append(users, i)
 		}
 	}
-
-
 
 	// нужные юзеры фильтрованные по нужному нам стеку
 	var needingUsers []Model.UserS
 	// кол во совпадающих технологий
 	var coincidences []int
 
-	for _,usr := range users{
+	for _, usr := range users {
 		var itskills []string
-		json.Unmarshal([]byte(usr.Skills),&itskills)
+		_ = json.Unmarshal([]byte(usr.Skills), &itskills)
 		adding := false
 		count := 0
-		for _,skill := range itskills{
-			for _,sk := range skills{
-				if sk == skill{
+		for _, skill := range itskills {
+			for _, sk := range skills {
+				if sk == skill {
 					adding = true
 					count++
 				}
 			}
 		}
-		if(adding){
-			needingUsers = append(needingUsers,usr)
-			coincidences = append(coincidences,count)
+		if adding {
+			needingUsers = append(needingUsers, usr)
+			coincidences = append(coincidences, count)
 		}
 	}
-
-
 
 	fmt.Println("++++++++++")
 	fmt.Println(needingUsers)
 	fmt.Println(coincidences)
 
-
 	// sort users and coincidenses
-	for i := range coincidences{
+	for i := range coincidences {
 		biggest := coincidences[i]
 		index := i
 
-		for j:=i;j<len(coincidences);j++{
-			if (biggest<coincidences[j]){
+		for j := i; j < len(coincidences); j++ {
+			if biggest < coincidences[j] {
 				index = j
 				biggest = coincidences[j]
 			}
@@ -257,13 +226,9 @@ func SelectBySkills(skills []string, id string) []Model.UserS {
 
 	}
 
-
-
 	fmt.Println("++++++++++")
 	fmt.Println(needingUsers)
 	fmt.Println(coincidences)
-
-
 
 	return needingUsers
 }
